@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
 from tkinter import messagebox
-import mysql.connector
+import sqlite3
 
 
 class Student:
@@ -137,12 +137,11 @@ class Student:
 
 
         #radiobuttons
-        self.var_radio1=StringVar()
-        radiobtn1=ttk.Radiobutton(studentInformation_frame,textvariable=self.var_radio1,text="Take Photo Sample",value="Yes")
+        self.var_radio=StringVar()
+        radiobtn1=ttk.Radiobutton(studentInformation_frame,variable=self.var_radio,text="Take Photo Sample",value="Yes")
         radiobtn1.grid(row=5,column=0)
         
-        self.var_radio2=StringVar()
-        radiobtn2=ttk.Radiobutton(studentInformation_frame,textvariable=self.var_radio2,text="No Photo Sample",value="No")
+        radiobtn2=ttk.Radiobutton(studentInformation_frame,variable=self.var_radio,text="No Photo Sample",value="No")
         radiobtn2.grid(row=5,column=1)
 
         #frame for buttons
@@ -243,8 +242,19 @@ class Student:
         if self.var_dep.get()=="Select Department":
             messagebox.showerror("Error","All fields are required!",parent=self.root)
         else:
-            pass    
-        
+            try:
+                conn=sqlite3.connect('classifier_db.db')
+                my_cursor=conn.cursor()
+                my_cursor.execute("insert into student_details values(?,?,?,?,?,?,?,?,?,?,?)",(self.var_eno.get(),self.var_dep.get(),self.var_course.get(),self.var_name.get(),self.var_year.get(),self.var_sem.get(),self.var_mob.get(),self.var_mail.get(),self.var_dob.get(),self.var_gender.get(),self.var_faculty.get(),))
+
+                conn.commit()
+                conn.close()
+                messagebox.showinfo("info","Student details has been added successfully!",parent=self.root)
+
+            except Exception as es:
+                messagebox.showerror("Error",f"Due to: {str(es)}",parent=self.root)
+                
+
 
 
 
