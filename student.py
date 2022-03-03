@@ -12,17 +12,19 @@ class Student:
         self.root.title("Classifier")
 
         #---------------------variables--------------
-        self.var_eno=StringVar()
+        
         self.var_dep=StringVar()
         self.var_course=StringVar()
-        self.var_name=StringVar()
         self.var_year=StringVar()
         self.var_sem=StringVar()
+        self.var_eno=StringVar()
+        self.var_name=StringVar()
         self.var_mob=StringVar()
-        self.var_mail=StringVar()
         self.var_dob=StringVar()
+        self.var_mail=StringVar()
         self.var_gender=StringVar()
         self.var_faculty=StringVar()
+        self.var_radio=StringVar()
 
         
 
@@ -46,11 +48,11 @@ class Student:
 
         #leftLable Frame
         Left_frame=LabelFrame(main_frame,bd=4,relief=RAISED,text="Student Details",font=("times new roman",15,"bold"))
-        Left_frame.place(x=30,y=10,width=620,height=650)
+        Left_frame.place(x=30,y=10,width=620,height=670)
 
         #current course
         current_frame=LabelFrame(Left_frame,bd=4,relief=RAISED,text="Current Details",font=("times new roman",15,"bold"))
-        current_frame.place(x=20,y=30,width=580,height=180)
+        current_frame.place(x=20,y=30,width=580,height=140)
         
         #department
         dep_label=Label(current_frame,text="Department",font=("times new roman",15,"bold"))
@@ -92,61 +94,60 @@ class Student:
 
         #student information
         studentInformation_frame=LabelFrame(Left_frame,bd=4,relief=RAISED,text="Student Information",font=("times new roman",15,"bold"))
-        studentInformation_frame.place(x=20,y=240,width=580,height=370)
+        studentInformation_frame.place(x=20,y=180,width=580,height=440)
         #Enrollment label
-        enrollment_label=Label(studentInformation_frame,text="Enrollment No.",font=("times new roman",15,"bold"))
-        enrollment_label.grid(row=0,column=0,padx=60,pady=7,sticky=W)
+        enrollment_label=Label(studentInformation_frame,text="Enrollment No.",font=("times new roman",14,"bold"))
+        enrollment_label.grid(row=0,column=0,padx=40,pady=7,sticky=W)
         enrollment_label=ttk.Entry(studentInformation_frame,textvariable=self.var_eno,width=17,font=("times new roman",14,"bold"))
-        enrollment_label.grid(row=0,column=1,padx=60,pady=7,sticky=W)
+        enrollment_label.grid(row=0,column=1,padx=40,pady=7,sticky=W)
 
         #Name label   
-        name_label=Label(studentInformation_frame,text="Name",font=("times new roman",15,"bold"))
-        name_label.grid(row=1,column=0,padx=60,pady=7,sticky=W)
+        name_label=Label(studentInformation_frame,text="Name",font=("times new roman",14,"bold"))
+        name_label.grid(row=1,column=0,padx=40,pady=7,sticky=W)
         name_label=ttk.Entry(studentInformation_frame,textvariable=self.var_name,width=17,font=("times new roman",14,"bold"))
-        name_label.grid(row=1,column=1,padx=60,pady=7,sticky=W)
+        name_label.grid(row=1,column=1,padx=40,pady=7,sticky=W)
 
         #Phone number label
-        phnum_label=Label(studentInformation_frame,text="Phone Number",font=("times new roman",15,"bold"))
-        phnum_label.grid(row=2,column=0,padx=60,pady=7,sticky=W)
+        phnum_label=Label(studentInformation_frame,text="Phone Number",font=("times new roman",14,"bold"))
+        phnum_label.grid(row=2,column=0,padx=40,pady=7,sticky=W)
         phnum_label=ttk.Entry(studentInformation_frame,textvariable=self.var_mob,width=17,font=("times new roman",14,"bold"))
-        phnum_label.grid(row=2,column=1,padx=60,pady=7,sticky=W)
+        phnum_label.grid(row=2,column=1,padx=40,pady=7,sticky=W)
 
         #dob label
-        dob_label=Label(studentInformation_frame,text="Date of birth",font=("times new roman",15,"bold"))
-        dob_label.grid(row=3,column=0,padx=60,pady=7,sticky=W)
+        dob_label=Label(studentInformation_frame,text="Date of birth",font=("times new roman",14,"bold"))
+        dob_label.grid(row=3,column=0,padx=40,pady=7,sticky=W)
         dob_label=ttk.Entry(studentInformation_frame,textvariable=self.var_dob,width=17,font=("times new roman",14,"bold"))
-        dob_label.grid(row=3,column=1,padx=60,pady=7,sticky=W)
+        dob_label.grid(row=3,column=1,padx=40,pady=7,sticky=W)
 
         #email label
-        email_label=Label(studentInformation_frame,text="Email",font=("times new roman",15,"bold"))
-        email_label.grid(row=4,column=0,padx=60,pady=7,sticky=W)
+        email_label=Label(studentInformation_frame,text="Email",font=("times new roman",14,"bold"))
+        email_label.grid(row=4,column=0,padx=40,pady=7,sticky=W)
         email_label=ttk.Entry(studentInformation_frame,textvariable=self.var_mail,width=17,font=("times new roman",14,"bold"))
-        email_label.grid(row=4,column=1,padx=60,pady=7,sticky=W)
+        email_label.grid(row=4,column=1,padx=40,pady=7,sticky=W)
 
         #gender label
-        gender_label=Label(studentInformation_frame,text="Gender",font=("times new roman",15,"bold"))
-        gender_label.grid(row=4,column=0,padx=60,pady=7,sticky=W)
+        gender_label=Label(studentInformation_frame,text="Gender",font=("times new roman",14,"bold"))
+        gender_label.grid(row=5,column=0,padx=40,pady=7,sticky=W)
         gender_label=ttk.Entry(studentInformation_frame,textvariable=self.var_gender,width=17,font=("times new roman",14,"bold"))
-        gender_label.grid(row=4,column=1,padx=60,pady=7,sticky=W)
+        gender_label.grid(row=5,column=1,padx=40,pady=7,sticky=W)
 
         #facultyname label
-        facultyname_label=Label(studentInformation_frame,text="Faculty Name",font=("times new roman",15,"bold"))
-        facultyname_label.grid(row=4,column=0,padx=60,pady=7,sticky=W)
+        facultyname_label=Label(studentInformation_frame,text="Faculty Name",font=("times new roman",14,"bold"))
+        facultyname_label.grid(row=6,column=0,padx=40,pady=7,sticky=W)
         facultyname_label=ttk.Entry(studentInformation_frame,textvariable=self.var_faculty,width=17,font=("times new roman",14,"bold"))
-        facultyname_label.grid(row=4,column=1,padx=60,pady=7,sticky=W)
+        facultyname_label.grid(row=6,column=1,padx=40,pady=7,sticky=W)
 
 
         #radiobuttons
-        self.var_radio=StringVar()
         radiobtn1=ttk.Radiobutton(studentInformation_frame,variable=self.var_radio,text="Take Photo Sample",value="Yes")
-        radiobtn1.grid(row=5,column=0)
+        radiobtn1.grid(row=7,column=0)
         
         radiobtn2=ttk.Radiobutton(studentInformation_frame,variable=self.var_radio,text="No Photo Sample",value="No")
-        radiobtn2.grid(row=5,column=1)
+        radiobtn2.grid(row=7,column=1)
 
         #frame for buttons
         btn_frame=Frame(studentInformation_frame,bd=4,relief=RAISED)
-        btn_frame.place(x=10,y=240,width=554,height=43)
+        btn_frame.place(x=10,y=320,width=554,height=43)
 
         save_btn=Button(btn_frame,text="Save",command=self.add_data,font=("times new roman",14,"bold"),width=12)
         save_btn.grid(row=0,column=0)
@@ -163,7 +164,7 @@ class Student:
         #frame for buttons below
 
         btn_frame1=Frame(studentInformation_frame,bd=4,relief=RAISED)
-        btn_frame1.place(x=10,y=284,width=554,height=43)
+        btn_frame1.place(x=10,y=360,width=554,height=43)
 
         take_btn=Button(btn_frame1,text="Take a Photo Sample",font=("times new roman",14,"bold"),width=27)
         take_btn.grid(row=0,column=0)
@@ -209,32 +210,49 @@ class Student:
         scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
         scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
 
-        self.student_table=ttk.Treeview(table_frame,column=("enrollment","dep","name","year","sem","mob","email"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
+        self.student_table=ttk.Treeview(table_frame,column=("dep","course","year","sem","enroll","name","mob","dob","email","gender","faculty","sample"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
         scroll_x.pack(side=BOTTOM,fill=X)
         scroll_y.pack(side=RIGHT,fill=Y)
 
         scroll_x.config(command=self.student_table.xview)
         scroll_y.config(command=self.student_table.yview)
 
-        self.student_table.heading("enrollment",text="Enrollment")
+
         self.student_table.heading("dep",text="Department")
-        self.student_table.heading("name",text="Name")
+        self.student_table.heading("course",text="Course")
         self.student_table.heading("year",text="Year")
         self.student_table.heading("sem",text="Semester")
+        self.student_table.heading("enroll",text="Enrollment")
+        self.student_table.heading("name",text="Name")
         self.student_table.heading("mob",text="MobNo")
+        self.student_table.heading("dob",text="DOB")
         self.student_table.heading("email",text="Email")
+        self.student_table.heading("gender",text="Gender")
+        self.student_table.heading("faculty",text="Faculty")
+        self.student_table.heading("sample",text="PhotoSample")
 
-        self.student_table.column("enrollment",width=100)
+        
         self.student_table.column("dep",width=100)
-        self.student_table.column("name",width=100)
+        self.student_table.column("course",width=100)
         self.student_table.column("year",width=100)
         self.student_table.column("sem",width=100)
+        self.student_table.column("enroll",width=100)
+        self.student_table.column("name",width=100)
         self.student_table.column("mob",width=100)
+        self.student_table.column("dob",width=100)
         self.student_table.column("email",width=100)
+        self.student_table.column("gender",width=100)
+        self.student_table.column("faculty",width=100)
+        self.student_table.column("sample",width=100)
+        
+        
+        
 
 
         self.student_table["show"]="headings"
         self.student_table.pack(fill=BOTH,expand=1)
+
+        self.fetch_data()
 
 
      #Fuctions for various operations
@@ -245,14 +263,34 @@ class Student:
             try:
                 conn=sqlite3.connect('classifier_db.db')
                 my_cursor=conn.cursor()
-                my_cursor.execute("insert into student_details values(?,?,?,?,?,?,?,?,?,?,?)",(self.var_eno.get(),self.var_dep.get(),self.var_course.get(),self.var_name.get(),self.var_year.get(),self.var_sem.get(),self.var_mob.get(),self.var_mail.get(),self.var_dob.get(),self.var_gender.get(),self.var_faculty.get(),))
+                my_cursor.execute("insert into student_details values(?,?,?,?,?,?,?,?,?,?,?,?)",(self.var_dep.get(),self.var_course.get(),self.var_year.get(),self.var_sem.get(),self.var_eno.get(),self.var_name.get(),self.var_mob.get(),self.var_dob.get(),self.var_mail.get(),self.var_gender.get(),self.var_faculty.get(),self.var_radio.get()))
 
                 conn.commit()
+                self.fetch_data()
                 conn.close()
                 messagebox.showinfo("info","Student details has been added successfully!",parent=self.root)
 
             except Exception as es:
                 messagebox.showerror("Error",f"Due to: {str(es)}",parent=self.root)
+
+    #fetching details from database
+    def fetch_data(self):
+        conn=sqlite3.connect('classifier_db.db')
+        my_cursor=conn.cursor()
+        my_cursor.execute("select * from student_details")
+        data=my_cursor.fetchall()
+
+        if len(data)!=0:
+            self.student_table.delete(*self.student_table.get_children())
+            
+            for i in data:
+                self.student_table.insert("",END,values=i)
+            conn.commit()
+        conn.close()
+
+
+  
+
                 
 
 
