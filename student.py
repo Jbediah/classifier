@@ -96,7 +96,7 @@ class Student:
         studentInformation_frame=LabelFrame(Left_frame,bd=4,relief=RAISED,text="Student Information",font=("times new roman",15,"bold"))
         studentInformation_frame.place(x=20,y=180,width=580,height=440)
         #Enrollment label
-        enrollment_label=Label(studentInformation_frame,text="Enrollment No.",font=("times new roman",14,"bold"))
+        enrollment_label=Label(studentInformation_frame,text="Student ID",font=("times new roman",14,"bold"))
         enrollment_label.grid(row=0,column=0,padx=40,pady=7,sticky=W)
         enrollment_label=ttk.Entry(studentInformation_frame,textvariable=self.var_eno,width=17,font=("times new roman",14,"bold"))
         enrollment_label.grid(row=0,column=1,padx=40,pady=7,sticky=W)
@@ -128,8 +128,14 @@ class Student:
         #gender label
         gender_label=Label(studentInformation_frame,text="Gender",font=("times new roman",14,"bold"))
         gender_label.grid(row=5,column=0,padx=40,pady=7,sticky=W)
-        gender_label=ttk.Entry(studentInformation_frame,textvariable=self.var_gender,width=17,font=("times new roman",14,"bold"))
-        gender_label.grid(row=5,column=1,padx=40,pady=7,sticky=W)
+        #gender_label=ttk.Entry(studentInformation_frame,textvariable=self.var_gender,width=17,font=("times new roman",14,"bold"))
+        #gender_label.grid(row=5,column=1,padx=40,pady=7,sticky=W)
+
+        ###combobox here
+        gender_combobox=ttk.Combobox(studentInformation_frame,textvariable=self.var_gender,font=("times new roman",14,"bold"),width=17,state="readonly")
+        gender_combobox["values"]=("Select Gender","Male","Female")
+        gender_combobox.current(0)
+        gender_combobox.grid(row=5,column=1,padx=40,pady=7,sticky=W)
 
         #facultyname label
         facultyname_label=Label(studentInformation_frame,text="Faculty Name",font=("times new roman",14,"bold"))
@@ -152,13 +158,13 @@ class Student:
         save_btn=Button(btn_frame,text="Save",command=self.add_data,font=("times new roman",14,"bold"),width=12)
         save_btn.grid(row=0,column=0)
 
-        update_btn=Button(btn_frame,text="Update",font=("times new roman",14,"bold"),width=12)
+        update_btn=Button(btn_frame,text="Update",command=self.update_data,font=("times new roman",14,"bold"),width=12)
         update_btn.grid(row=0,column=1)
 
-        delete_btn=Button(btn_frame,text="Delete",font=("times new roman",14,"bold"),width=12)
+        delete_btn=Button(btn_frame,text="Delete",command=self.delete_data,font=("times new roman",14,"bold"),width=12)
         delete_btn.grid(row=0,column=2)
 
-        reset_btn=Button(btn_frame,text="reset",font=("times new roman",14,"bold"),width=12)
+        reset_btn=Button(btn_frame,text="reset",command=self.reset_data,font=("times new roman",14,"bold"),width=12)
         reset_btn.grid(row=0,column=3)
 
         #frame for buttons below
@@ -252,12 +258,14 @@ class Student:
         self.student_table["show"]="headings"
         self.student_table.pack(fill=BOTH,expand=1)
 
+
+        self.student_table.bind("<ButtonRelease>",self.get_cursor)
         self.fetch_data()
 
 
      #Fuctions for various operations
     def add_data(self):
-        if self.var_dep.get()=="Select Department":
+        if self.var_dep.get()=="Select Department" or self.var_course.get()=="Select Department" or self.var_year.get()=="Select Department" or self.var_sem.get()=="Select Department" or self.var_eno.get()=="" or self.var_name.get()=="" or self.var_mob.get()=="" or self.var_dob.get()=="" or self.var_mail.get()=="" or self.var_gender.get()=="" or self.var_faculty.get()=="":
             messagebox.showerror("Error","All fields are required!",parent=self.root)
         else:
             try:
@@ -288,6 +296,92 @@ class Student:
             conn.commit()
         conn.close()
 
+    #get cursor function.....to show details in fields from table
+    
+    def get_cursor(self,event=""):
+        cursor_focus=self.student_table.focus()
+        content=self.student_table.item(cursor_focus)
+        data=content["values"]
+
+        self.var_dep.set(data[0]),
+        self.var_course.set(data[1]),
+        self.var_year.set(data[2]),
+        self.var_sem.set(data[3]),
+        self.var_eno.set(data[4]),
+        self.var_name.set(data[5]),
+        self.var_mob.set(data[6]),
+        self.var_dob.set(data[7]),
+        self.var_mail.set(data[8]),
+        self.var_gender.set(data[9]),
+        self.var_faculty.set(data[10]),
+        self.var_radio.set(data[11]),
+
+
+    #update function
+    def update_data(self):
+        if self.var_dep.get()=="Select Department" or self.var_course.get()=="Select Department" or self.var_year.get()=="Select Department" or self.var_sem.get()=="Select Department" or self.var_eno.get()=="" or self.var_name.get()=="" or self.var_mob.get()=="" or self.var_dob.get()=="" or self.var_mail.get()=="" or self.var_gender.get()=="" or self.var_faculty.get()=="":
+            messagebox.showerror("Error","All fields are required!",parent=self.root)
+        
+        else:
+            try:
+                Update=messagebox.askyesno("update","Do you want to update with these details?",parent=self.root)
+                if Update>0:
+                    conn=sqlite3.connect('classifier_db.db')
+                    my_cursor=conn.cursor()
+                    my_cursor.execute("update student_details set dep=?,course=?,year=?,sem=?,name=?,mob=?,dob=?,mail=?,gender=?,faculty=?,sample=? where enroll=?",(self.var_dep.get(),self.var_course.get(),self.var_year.get(),self.var_sem.get(),self.var_name.get(),self.var_mob.get(),self.var_dob.get(),self.var_mail.get(),self.var_gender.get(),self.var_faculty.get(),self.var_radio.get(),self.var_eno.get()))
+
+                else:
+                    if not Update:
+                        return
+                messagebox.showinfo("success","student details updated successfully!",parent=self.root)
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+            except Exception as es:
+                messagebox.showerror("error",f"Due to:{str(es)}",parent=self.root)
+
+
+
+    #delete function
+    def delete_data(self):
+        if self.var_eno.get()=="":
+            messagebox.showerror("error","Student ID is required",parent=self.root)
+        else:
+            try:
+                delete=messagebox.askyesno("info","Are you sure you want to delete this student",parent=self.root)
+                
+                if delete>0:
+                    conn=sqlite3.connect('classifier_db.db')
+                    my_cursor=conn.cursor()
+                    sql="delete from student_details where enroll=?"
+                    val=(self.var_eno.get(),)
+                    my_cursor.execute(sql,val)
+                else:
+                    if not delete:
+                        return
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo("info","Successfully deleted student details !",parent=self.root)
+            except Exception as es:
+                messagebox.showerror("error",f"Due to:{str(es)}",parent=self.root)
+
+
+
+    #reset fuction
+    def reset_data(self):
+        self.var_dep.set("Select Department")
+        self.var_course.set("Select Course")
+        self.var_year.set("Select Year")
+        self.var_sem.set("Select Semester")
+        self.var_eno.set("")
+        self.var_name.set("")
+        self.var_mob.set("")
+        self.var_dob.set("")
+        self.var_mail.set("")
+        self.var_gender.set("Select Gender")
+        self.var_faculty.set("")
+        self.var_radio.set("")
 
   
 
