@@ -2,7 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
 from student import Student
-
+from tkinter import messagebox
+import os
 
 class Home:
     def __init__(self,root):
@@ -11,7 +12,7 @@ class Home:
         self.root.title("Classifier")
 
         #backgroundImage
-        img=Image.open(r"/home/jbediah/Documents/classifier/raw/test2.jpg")
+        img=Image.open(r"raw/test2.jpg")
         img=img.resize((1366,800),Image.ANTIALIAS)
         self.photoimg=ImageTk.PhotoImage(img)
 
@@ -23,16 +24,28 @@ class Home:
         title_lbl.place(x=0,y=45,width=1366,height=55)
 
         #imageButton1
-        img1=Image.open(r"/home/jbediah/Documents/classifier/raw/details.png")
+        img1=Image.open(r"raw/details.png")
         img1=img1.resize((150,150),Image.ANTIALIAS)
         self.photoimg1=ImageTk.PhotoImage(img1)
 
 
         b1=Button(f_lbl,image=self.photoimg1,command=self.student_page,cursor="hand2")
-        b1.place(x=600,y=250,width=150,height=150)
+        b1.place(x=200,y=250,width=150,height=150)
         #realButton
         b1_1=Button(f_lbl,text="Student Details",command=self.student_page,cursor="hand2")
-        b1_1.place(x=600,y=400,width=150,height=30)
+        b1_1.place(x=200,y=400,width=150,height=30)
+
+        #imageButton2
+        img2=Image.open(r"raw/photos.png")
+        img2=img2.resize((150,150),Image.ANTIALIAS)
+        self.photoimg2=ImageTk.PhotoImage(img2)
+
+
+        b2=Button(f_lbl,image=self.photoimg2,command=self.open_img,cursor="hand2")
+        b2.place(x=500,y=250,width=150,height=150)
+        #realButton
+        b2_2=Button(f_lbl,text="Photos",command=self.open_img,cursor="hand2")
+        b2_2.place(x=500,y=400,width=150,height=30)
 
 
  ##Function to open a new window
@@ -40,6 +53,13 @@ class Home:
         self.new_window=Toplevel(self.root)
         self.app=Student(self.new_window)
 
+
+
+
+
+    #function to open photos directory
+    def open_img(self):
+        messagebox.showerror("error","Acess denied!",parent=self.root)
 
 
 

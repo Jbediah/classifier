@@ -3,7 +3,6 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from home import Home
 
-
 class Face_Recognition_System:
     def __init__(self,root):
         self.root=root
@@ -63,6 +62,10 @@ class Face_Recognition_System:
     def homepage(self):
         self.new_window=Toplevel(self.root)
         self.app=Home(self.new_window)
+
+
+
+
         
 
 
