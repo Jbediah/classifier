@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from student import Student
 from train import Train
+from face_recognition import Face_recognition
 from tkinter import messagebox
 import os
 
@@ -61,6 +62,18 @@ class Home:
         b3_3=Button(f_lbl,text="Train Data",command=self.train_data_page,cursor="hand2")
         b3_3.place(x=800,y=400,width=150,height=30)
 
+        #imageButton4
+        img4=Image.open(r"raw/facial-recognition.png")
+        img4=img4.resize((150,150),Image.ANTIALIAS)
+        self.photoimg4=ImageTk.PhotoImage(img4)
+
+
+        b4=Button(f_lbl,image=self.photoimg4,command=self.facial_recog_page,cursor="hand2")
+        b4.place(x=1100,y=250,width=150,height=150)
+        #realButton
+        b4_4=Button(f_lbl,text="Facial Recognition",command=self.facial_recog_page,cursor="hand2")
+        b4_4.place(x=1100,y=400,width=150,height=30)
+
 
  ##Function to open student window
     def student_page(self):
@@ -72,6 +85,10 @@ class Home:
         self.new_window=Toplevel(self.root)
         self.app=Train(self.new_window)
 
+##Function to facialrecog  window
+    def facial_recog_page(self):
+        self.new_window=Toplevel(self.root)
+        self.app=Face_recognition(self.new_window)
 
 
 
