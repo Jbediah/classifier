@@ -4,6 +4,7 @@ from PIL import Image,ImageTk
 from tkinter import messagebox
 import sqlite3
 import cv2
+import os
 
 
 class Student:
@@ -30,7 +31,7 @@ class Student:
         
 
         #backgroundImage
-        img=Image.open(r"/home/jbediah/Documents/classifier/raw/test2.jpg")
+        img=Image.open(r"raw/test2.jpg")
         img=img.resize((1500,1000),Image.ANTIALIAS)
         self.photoimg=ImageTk.PhotoImage(img)
 
@@ -383,6 +384,8 @@ class Student:
         self.var_gender.set("Select Gender")
         self.var_faculty.set("")
         self.var_radio.set("")
+
+        
 
 
     #OPEN CV PART

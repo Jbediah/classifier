@@ -10,7 +10,7 @@ class Face_Recognition_System:
         self.root.title("Classifier")
 
         #backgroundImage
-        img=Image.open(r"/home/jbediah/Documents/classifier/raw/test2.jpg")
+        img=Image.open(r"raw/test2.jpg")
         img=img.resize((1366,800),Image.ANTIALIAS)
         self.photoimg=ImageTk.PhotoImage(img)
 
@@ -23,7 +23,7 @@ class Face_Recognition_System:
 
 
         #button
-        img2=Image.open(r"/home/jbediah/Documents/classifier/raw/log.png")
+        img2=Image.open(r"raw/log.png")
         img2=img2.resize((150,150),Image.ANTIALIAS)
         self.photoimg2=ImageTk.PhotoImage(img2)
 
@@ -35,7 +35,7 @@ class Face_Recognition_System:
         b1_1.place(x=250,y=400,width=150,height=30)
 
         #imageButton2
-        img3=Image.open(r"/home/jbediah/Documents/classifier/raw/signup.png")
+        img3=Image.open(r"raw/signup.png")
         img3=img3.resize((150,150),Image.ANTIALIAS)
         self.photoimg3=ImageTk.PhotoImage(img3)
 
@@ -47,7 +47,7 @@ class Face_Recognition_System:
         b2_2.place(x=600,y=400,width=150,height=30)
 
         #imageButton3
-        img4=Image.open(r"/home/jbediah/Documents/classifier/raw/exit.png")
+        img4=Image.open(r"raw/exit.png")
         img4=img4.resize((150,150),Image.ANTIALIAS)
         self.photoimg4=ImageTk.PhotoImage(img4)
 
