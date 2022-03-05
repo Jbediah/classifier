@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
 from student import Student
+from train import Train
 from tkinter import messagebox
 import os
 
@@ -48,10 +49,28 @@ class Home:
         b2_2.place(x=500,y=400,width=150,height=30)
 
 
- ##Function to open a new window
+        #imageButton3
+        img3=Image.open(r"raw/train.png")
+        img3=img3.resize((150,150),Image.ANTIALIAS)
+        self.photoimg3=ImageTk.PhotoImage(img3)
+
+
+        b3=Button(f_lbl,image=self.photoimg3,command=self.train_data_page,cursor="hand2")
+        b3.place(x=800,y=250,width=150,height=150)
+        #realButton
+        b3_3=Button(f_lbl,text="Train Data",command=self.train_data_page,cursor="hand2")
+        b3_3.place(x=800,y=400,width=150,height=30)
+
+
+ ##Function to open student window
     def student_page(self):
         self.new_window=Toplevel(self.root)
         self.app=Student(self.new_window)
+
+ ##Function to traindata  window
+    def train_data_page(self):
+        self.new_window=Toplevel(self.root)
+        self.app=Train(self.new_window)
 
 
 
