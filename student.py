@@ -70,7 +70,7 @@ class Student:
         course_label.grid(row=0,column=2,padx=8,sticky=W)
 
         course_combobox=ttk.Combobox(current_frame,textvariable=self.var_course,font=("times new roman",14,"bold"),width=17,state="readonly")
-        course_combobox["values"]=("Select Course","CSE","CSE-Data Science","CSE-AI/ML","CS-Business Systems","Information Technology","Electrical and Electronics","Electronics and Communication","Mechanical","Civil","Automobile")
+        course_combobox["values"]=("Select Course","Mathematics","Data Structures","Operating Systems","Database Management System","OOP","Data Science","Software Engineering","Python","Discrete Structures","Computer Networks")
         course_combobox.current(0)
         course_combobox.grid(row=0,column=3,padx=3,pady=12,sticky=W)
 
@@ -79,7 +79,7 @@ class Student:
         year_label.grid(row=1,column=0,padx=8,sticky=W)
 
         year_combobox=ttk.Combobox(current_frame,textvariable=self.var_year,font=("times new roman",14,"bold"),width=17,state="readonly")
-        year_combobox["values"]=("Select Year","CSE","CSE-Data Science","CSE-AI/ML","CS-Business Systems","Information Technology","Electrical and Electronics","Electronics and Communication","Mechanical","Civil","Automobile")
+        year_combobox["values"]=("Select Year","1","2","3","4")
         year_combobox.current(0)
         year_combobox.grid(row=1,column=1,padx=3,pady=12,sticky=W)
 
@@ -88,7 +88,7 @@ class Student:
         sem_label.grid(row=1,column=2,padx=8,sticky=W)
 
         sem_combobox=ttk.Combobox(current_frame,textvariable=self.var_sem,font=("times new roman",14,"bold"),width=17,state="readonly")
-        sem_combobox["values"]=("Select Semester","CSE","CSE-Data Science","CSE-AI/ML","CS-Business Systems","Information Technology","Electrical and Electronics","Electronics and Communication","Mechanical","Civil","Automobile")
+        sem_combobox["values"]=("Select Semester","1","2","3","4","5","6","7","8")
         sem_combobox.current(0)
         sem_combobox.grid(row=1,column=3,padx=3,pady=12,sticky=W)
 

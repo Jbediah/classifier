@@ -3,6 +3,8 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from student import Student
 from tkinter import messagebox
+from time import strftime
+from datetime import datetime
 import os
 import sqlite3
 import numpy as np
@@ -78,6 +80,8 @@ class Face_recognition:
                         cv2.putText(img,f"Name:{n}",(x,y-35),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,0,0),2)
                         cv2.putText(img,f"Dep:{r}",(x,y-10),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,0,0),2)
 
+                        self.mark_attendance(e,n,r)
+
                     else:
                         cv2.rectangle(img,(x,y),(x+y,y+w),(0,0,255),3)
                         cv2.putText(img,"unknown",(x,y-55),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,0,0))
@@ -106,6 +110,26 @@ class Face_recognition:
                 video_cap.release()
                 cv2.destroyAllWindows()
                 break
+
+
+
+
+    #marking attendance
+    def mark_attendance(self,e,n,r):
+        with open("attendance.csv","r+",newline="\n") as f:
+            myDataList=f.readlines()
+            name_list=[]
+            for line in myDataList:
+                entry=line.split((","))
+                name_list.append(entry[0])
+            
+            if((e not in name_list) and (n not in name_list) and (r not in name_list)):
+                now=datetime.now()
+                d1=now.strftime("%d/%m/%Y")
+                dtString=now.strftime("%H:%M:%S")
+                f.writelines(f"\n{e},{n},{r},{dtString},{d1},Present")
+
+
 
         
 if __name__=="__main__":
