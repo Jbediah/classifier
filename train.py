@@ -10,33 +10,33 @@ import cv2
 class Train:
     def __init__(self,root):
         self.root=root
-        self.root.geometry("1366x800+0+0")
+        self.root.geometry("1920x1080+0+0")
         self.root.title("Train Data")
 
         #backgroundImage
         img=Image.open(r"raw/test2.jpg")
-        img=img.resize((1366,800),Image.ANTIALIAS)
+        img=img.resize((1920,1080),Image.ANTIALIAS)
         self.photoimg=ImageTk.PhotoImage(img)
 
         f_lbl=Label(self.root,image=self.photoimg)
-        f_lbl.place(x=0,y=0,width=1366,height=800)
+        f_lbl.place(x=0,y=0,width=1920,height=1080)
 
          #first Label
         title_lbl=Label(f_lbl,text="Train the Data Model",font=("times new roman",35,"bold"),fg="white",bg="black")
-        title_lbl.place(x=0,y=45,width=1366,height=55)
+        title_lbl.place(x=0,y=45,width=1920,height=55)
 
 
         #imageButton1
         img1=Image.open(r"raw/train.png")
-        img1=img1.resize((150,150),Image.ANTIALIAS)
+        img1=img1.resize((250,250),Image.ANTIALIAS)
         self.photoimg1=ImageTk.PhotoImage(img1)
 
 
         b1=Button(f_lbl,image=self.photoimg1,command=self.train_classifier,cursor="hand2")
-        b1.place(x=600,y=300,width=150,height=150)
+        b1.place(x=860,y=350,width=250,height=250)
         #realButton
         b1_1=Button(f_lbl,text="Train",command=self.train_classifier,cursor="hand2")
-        b1_1.place(x=600,y=450,width=150,height=30)
+        b1_1.place(x=860,y=600,width=250,height=30)
 
 
 
@@ -76,5 +76,5 @@ class Train:
 if __name__=="__main__":
     root=Tk()
     obj=Train(root)
-    root.resizable(False,False)
+    #root.resizable(False,False)
     root.mainloop()

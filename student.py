@@ -10,7 +10,7 @@ import os
 class Student:
     def __init__(self,root):
         self.root=root
-        self.root.geometry("1366x800+0+0")
+        self.root.geometry("1920x1080+0+0")
         self.root.title("Classifier")
 
         #---------------------variables--------------
@@ -32,11 +32,11 @@ class Student:
 
         #backgroundImage
         img=Image.open(r"raw/test2.jpg")
-        img=img.resize((1500,1000),Image.ANTIALIAS)
+        img=img.resize((1920,1080),Image.ANTIALIAS)
         self.photoimg=ImageTk.PhotoImage(img)
 
         f_lbl=Label(self.root,image=self.photoimg)
-        f_lbl.place(x=0,y=0,width=1366,height=800)
+        f_lbl.place(x=0,y=0,width=1920,height=1080)
 
          #first Label
         title_lbl=Label(f_lbl,text="Student Details",font=("times new roman",35,"bold"),fg="white",bg="black")
@@ -452,5 +452,5 @@ class Student:
 if __name__=="__main__":
     root=Tk()
     obj=Student(root)
-    root.resizable(False,False)
+    #root.resizable(False,False)
     root.mainloop()
