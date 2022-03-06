@@ -36,6 +36,52 @@ class Attendance:
 
 
 
+        #department
+        attedance_label=Label(Left_frame,text="Attendance status :",font=("times new roman",17,"bold"))
+        attedance_label.grid(row=0,column=0,padx=18,pady=50,sticky=W)
+
+        attedance_combobox=ttk.Combobox(Left_frame,font=("times new roman",17,"bold"),width=17,state="readonly")
+        attedance_combobox["values"]=("Select Status","Present","Absent")
+        attedance_combobox.current(0)
+        attedance_combobox.grid(row=0,column=1,padx=18,pady=40,sticky=W)
+
+
+
+        #enroll label   
+        enroll_label=Label(Left_frame,text="Roll Number",font=("times new roman",17,"bold"))
+        enroll_label.grid(row=2,column=0,padx=18,pady=15,sticky=W)
+        enroll_label=ttk.Entry(Left_frame,width=17,font=("times new roman",17,"bold"))
+        enroll_label.grid(row=2,column=1,padx=18,pady=15,sticky=W)
+
+        #Name label   
+        name_label=Label(Left_frame,text="Name",font=("times new roman",17,"bold"))
+        name_label.grid(row=1,column=0,padx=18,pady=5,sticky=W)
+        name_label=ttk.Entry(Left_frame,width=17,font=("times new roman",17,"bold"))
+        name_label.grid(row=1,column=1,padx=18,pady=5,sticky=W)
+
+        #branch label   
+        branch_label=Label(Left_frame,text="Branch",font=("times new roman",17,"bold"))
+        branch_label.grid(row=3,column=0,padx=18,pady=15,sticky=W)
+        branch_label=ttk.Entry(Left_frame,width=17,font=("times new roman",17,"bold"))
+        branch_label.grid(row=3,column=1,padx=18,pady=15,sticky=W)
+
+        #time label   
+        time_label=Label(Left_frame,text="Time",font=("times new roman",17,"bold"))
+        time_label.grid(row=4,column=0,padx=18,pady=15,sticky=W)
+        time_label=ttk.Entry(Left_frame,width=17,font=("times new roman",17,"bold"))
+        time_label.grid(row=4,column=1,padx=18,pady=15,sticky=W)
+
+        #date label   
+        date_label=Label(Left_frame,text="Date",font=("times new roman",17,"bold"))
+        date_label.grid(row=5,column=0,padx=18,pady=15,sticky=W)
+        date_label=ttk.Entry(Left_frame,width=17,font=("times new roman",17,"bold"))
+        date_label.grid(row=5,column=1,padx=18,pady=15,sticky=W)
+
+
+
+
+
+
         #rightLable Frame
         right_frame=LabelFrame(main_frame,bd=4,relief=RAISED,text="Student Details",font=("times new roman",15,"bold"))
         right_frame.place(x=630,y=10,width=550,height=500)

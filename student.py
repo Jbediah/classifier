@@ -177,7 +177,7 @@ class Student:
         take_btn=Button(btn_frame1,text="Take a Photo Sample",command=self.generate_dataset,font=("times new roman",14,"bold"),width=27)
         take_btn.grid(row=0,column=0)
 
-        update_btn=Button(btn_frame1,text="Update Photo Sample",font=("times new roman",14,"bold"),width=27)
+        update_btn=Button(btn_frame1,text="Update Photo Sample",command=self.generate_dataset,font=("times new roman",14,"bold"),width=27)
         update_btn.grid(row=0,column=1)
 
 
@@ -403,6 +403,7 @@ class Student:
                 
                 for x in myresult:
                     id+=1
+                id=self.var_eno .get()
                 my_cursor.execute("update student_details set dep=?,course=?,year=?,sem=?,name=?,mob=?,dob=?,mail=?,gender=?,faculty=?,sample=? where enroll=?",(self.var_dep.get(),self.var_course.get(),self.var_year.get(),self.var_sem.get(),self.var_name.get(),self.var_mob.get(),self.var_dob.get(),self.var_mail.get(),self.var_gender.get(),self.var_faculty.get(),self.var_radio.get(),self.var_eno.get()))
                 
                 conn.commit()
