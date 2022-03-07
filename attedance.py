@@ -13,6 +13,11 @@ class Attendance:
         self.root.geometry("1920x1080+0+0")
         self.root.title("Classifier")
 
+
+        ##variables
+        self.var_dep=StringVar()
+
+
         #backgroundImage
         img=Image.open(r"raw/test2.jpg")
         img=img.resize((1920,1080),Image.ANTIALIAS)
@@ -60,10 +65,16 @@ class Attendance:
         name_label.grid(row=1,column=1,padx=65,pady=5,sticky=W)
 
         #branch label   
-        branch_label=Label(Left_frame,text="Branch",font=("times new roman",20,"bold"))
+        branch_label=Label(Left_frame,text="Department",font=("times new roman",20,"bold"))
         branch_label.grid(row=3,column=0,padx=65,pady=20,sticky=W)
-        branch_label=ttk.Entry(Left_frame,width=17,font=("times new roman",20,"bold"))
-        branch_label.grid(row=3,column=1,padx=65,pady=20,sticky=W)
+        #branch_label=ttk.Entry(Left_frame,width=17,font=("times new roman",20,"bold"))
+        #branch_label.grid(row=3,column=1,padx=65,pady=20,sticky=W)
+
+        dep_combobox=ttk.Combobox(Left_frame,textvariable=self.var_dep,font=("times new roman",20,"bold"),width=17,state="readonly")
+        dep_combobox["values"]=("Select Department","CSE","CSE-Data Science","CSE-AI/ML","CS-Business Systems","Information Technology","Electrical and Electronics","Electronics and Communication","Mechanical","Civil","Automobile")
+        dep_combobox.current(0)
+        dep_combobox.grid(row=3,column=1,padx=65,pady=20,sticky=W,)
+
 
         #time label   
         time_label=Label(Left_frame,text="Time",font=("times new roman",20,"bold"))
@@ -107,8 +118,8 @@ class Attendance:
         right_frame.place(x=860,y=50,width=800,height=660)
 
         ##search frame
-        search_frame=LabelFrame(right_frame,bd=4,relief=RAISED,text="Search Frame",font=("times new roman",15,"bold"))
-        search_frame.place(x=20,y=30,width=580,height=180)
+        search_frame=LabelFrame(right_frame,bd=12,relief=RIDGE,text="Search Frame",font=("times new roman",20,"bold"))
+        search_frame.place(x=20,y=30,width=720,height=180)
 
         search_label=Label(search_frame,text="Search by :",font=("times new roman",17,"bold"))
         search_label.grid(row=0,column=0,padx=15,pady=16,sticky=W)
@@ -121,21 +132,21 @@ class Attendance:
         search_entry=ttk.Entry(search_frame,width=14,font=("times new roman",17,"bold"))
         search_entry.grid(row=0,column=2,padx=15,pady=16,sticky=W)
 
-        search_btn=Button(search_frame,text="Search",font=("times new roman",16,"bold"),width=8)
+        search_btn=Button(search_frame,text="Search",font=("times new roman",17,"bold"),width=8)
         search_btn.grid(row=1,column=1,pady=10)
 
-        show_btn=Button(search_frame,text="Show all",font=("times new roman",16,"bold"),width=8)
+        show_btn=Button(search_frame,text="Show all",font=("times new roman",17,"bold"),width=8)
         show_btn.grid(row=1,column=2,pady=10)
 
 
         ##table form
-        table_frame=LabelFrame(right_frame,bd=4,relief=RAISED,)
-        table_frame.place(x=20,y=240,width=580,height=360)
+        table_frame=LabelFrame(right_frame,bd=8,relief=RIDGE,)
+        table_frame.place(x=20,y=240,width=720,height=350)
 
         scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
         scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
 
-        self.student_table=ttk.Treeview(table_frame,column=("dep","course","year","sem","enroll","name","mob","dob","email","gender","faculty","sample"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
+        self.student_table=ttk.Treeview(table_frame,column=("name","roll","dep","time","date","status"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
         scroll_x.pack(side=BOTTOM,fill=X)
         scroll_y.pack(side=RIGHT,fill=Y)
 
@@ -143,33 +154,21 @@ class Attendance:
         scroll_y.config(command=self.student_table.yview)
 
 
-        self.student_table.heading("dep",text="Department")
-        self.student_table.heading("course",text="Course")
-        self.student_table.heading("year",text="Year")
-        self.student_table.heading("sem",text="Semester")
-        self.student_table.heading("enroll",text="Enrollment")
         self.student_table.heading("name",text="Name")
-        self.student_table.heading("mob",text="MobNo")
-        self.student_table.heading("dob",text="DOB")
-        self.student_table.heading("email",text="Email")
-        self.student_table.heading("gender",text="Gender")
-        self.student_table.heading("faculty",text="Faculty")
-        self.student_table.heading("sample",text="PhotoSample")
+        self.student_table.heading("roll",text="Roll No")
+        self.student_table.heading("dep",text="Department")
+        self.student_table.heading("time",text="Time")
+        self.student_table.heading("date",text="Date")
+        self.student_table.heading("status",text="Status")
+        
 
         
-        self.student_table.column("dep",width=100)
-        self.student_table.column("course",width=100)
-        self.student_table.column("year",width=100)
-        self.student_table.column("sem",width=100)
-        self.student_table.column("enroll",width=100)
         self.student_table.column("name",width=100)
-        self.student_table.column("mob",width=100)
-        self.student_table.column("dob",width=100)
-        self.student_table.column("email",width=100)
-        self.student_table.column("gender",width=100)
-        self.student_table.column("faculty",width=100)
-        self.student_table.column("sample",width=100)
-        
+        self.student_table.column("roll",width=100)
+        self.student_table.column("dep",width=100)
+        self.student_table.column("time",width=100)
+        self.student_table.column("date",width=100)
+        self.student_table.column("status",width=100)
         
         
 

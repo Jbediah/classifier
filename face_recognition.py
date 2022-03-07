@@ -26,20 +26,20 @@ class Face_recognition:
 
          #first Label
         title_lbl=Label(f_lbl,text="Facial Recognition System",font=("times new roman",35,"bold"),fg="white",bg="black")
-        title_lbl.place(x=0,y=45,width=1366,height=55)
+        title_lbl.place(x=0,y=45,width=1920,height=55)
 
 
         #imageButton1
         img1=Image.open(r"raw/facial-recognition2.png")
-        img1=img1.resize((150,150),Image.ANTIALIAS)
+        img1=img1.resize((250,250),Image.ANTIALIAS)
         self.photoimg1=ImageTk.PhotoImage(img1)
 
 
         b1=Button(f_lbl,image=self.photoimg1,command=self.face_recog,cursor="hand2")
-        b1.place(x=600,y=300,width=150,height=150)
+        b1.place(x=850,y=350,width=250,height=250)
         #realButton
         b1_1=Button(f_lbl,text="Start",command=self.face_recog,cursor="hand2")
-        b1_1.place(x=600,y=450,width=150,height=30)
+        b1_1.place(x=850,y=600,width=250,height=30)
 
 
 

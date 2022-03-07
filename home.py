@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from student import Student
 from train import Train
+from attedance import Attendance
 from face_recognition import Face_recognition
 from tkinter import messagebox
 import os
@@ -81,10 +82,10 @@ class Home:
         self.photoimg5=ImageTk.PhotoImage(img5)
 
 
-        b5=Button(f_lbl,image=self.photoimg5,command=self.facial_recog_page,cursor="hand2")
+        b5=Button(f_lbl,image=self.photoimg5,command=self.attedance_page,cursor="hand2")
         b5.place(x=1200,y=600,width=250,height=250)
         #realButton
-        b5_5=Button(f_lbl,text="Show Attendance",command=self.facial_recog_page,cursor="hand2")
+        b5_5=Button(f_lbl,text="Show Attendance",command=self.attedance_page,cursor="hand2")
         b5_5.place(x=1200,y=850,width=250,height=30)
 
 
@@ -102,6 +103,11 @@ class Home:
     def facial_recog_page(self):
         self.new_window=Toplevel(self.root)
         self.app=Face_recognition(self.new_window)
+
+##Function to attendanceview  window
+    def attedance_page(self):
+        self.new_window=Toplevel(self.root)
+        self.app=Attendance(self.new_window)
 
 
 
