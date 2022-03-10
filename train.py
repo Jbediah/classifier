@@ -64,7 +64,7 @@ class Train:
         clf=cv2.face.LBPHFaceRecognizer_create()
         clf.train(faces,ids)
         clf.write("classsifier.xml")
-        messagebox.showinfo("info","Training DataSets completed!")
+        messagebox.showinfo("info","Training DataSets completed!",parent=self.root)
         cv2.destroyAllWindows()
 
 

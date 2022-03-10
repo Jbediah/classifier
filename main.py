@@ -51,10 +51,10 @@ class Face_Recognition_System:
         img4=img4.resize((250,250),Image.ANTIALIAS)
         self.photoimg4=ImageTk.PhotoImage(img4)
 
-        b3=Button(f_lbl,image=self.photoimg4,cursor="hand2")
+        b3=Button(f_lbl,image=self.photoimg4,command=exit,cursor="hand2")
         b3.place(x=1400,y=350,width=250,height=250)
         #realButton
-        b3_3=Button(f_lbl,text="Exit",cursor="hand2")
+        b3_3=Button(f_lbl,text="Exit",command=exit,cursor="hand2")
         b3_3.place(x=1400,y=600,width=250,height=30)
 
 
@@ -62,6 +62,11 @@ class Face_Recognition_System:
     def homepage(self):
         self.new_window=Toplevel(self.root)
         self.app=Home(self.new_window)
+
+
+    def exit():
+        self.root.destroy()
+
 
 
 

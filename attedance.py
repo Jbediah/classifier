@@ -6,6 +6,12 @@ from tkinter import messagebox
 import os
 import numpy as np
 import cv2
+import csv
+from tkinter import filedialog
+
+
+
+mydata=[]
 
 class Attendance:
     def __init__(self,root):
@@ -15,7 +21,13 @@ class Attendance:
 
 
         ##variables
+        self.var_status=StringVar()
+        self.var_name=StringVar()
+        self.var_roll=StringVar()
         self.var_dep=StringVar()
+        self.var_time=StringVar()
+        self.var_date=StringVar()
+        
 
 
         #backgroundImage
@@ -41,11 +53,11 @@ class Attendance:
 
 
 
-        #department
+        #status
         attedance_label=Label(Left_frame,text="Attendance status :",font=("times new roman",20,"bold"))
         attedance_label.grid(row=0,column=0,padx=65,pady=50,sticky=W)
 
-        attedance_combobox=ttk.Combobox(Left_frame,font=("times new roman",20,"bold"),width=17,state="readonly")
+        attedance_combobox=ttk.Combobox(Left_frame,font=("times new roman",20,"bold"),textvariable=self.var_status,width=17,state="readonly")
         attedance_combobox["values"]=("Select Status","Present","Absent")
         attedance_combobox.current(0)
         attedance_combobox.grid(row=0,column=1,padx=65,pady=40,sticky=W)
@@ -55,13 +67,13 @@ class Attendance:
         #enroll label   
         enroll_label=Label(Left_frame,text="Roll Number",font=("times new roman",20,"bold"))
         enroll_label.grid(row=2,column=0,padx=65,pady=15,sticky=W)
-        enroll_label=ttk.Entry(Left_frame,width=17,font=("times new roman",20,"bold"))
+        enroll_label=ttk.Entry(Left_frame,width=17,textvariable=self.var_roll,font=("times new roman",20,"bold"))
         enroll_label.grid(row=2,column=1,padx=65,pady=15,sticky=W)
 
         #Name label   
         name_label=Label(Left_frame,text="Name",font=("times new roman",20,"bold"))
         name_label.grid(row=1,column=0,padx=65,pady=5,sticky=W)
-        name_label=ttk.Entry(Left_frame,width=17,font=("times new roman",20,"bold"))
+        name_label=ttk.Entry(Left_frame,width=17,textvariable=self.var_name,font=("times new roman",20,"bold"))
         name_label.grid(row=1,column=1,padx=65,pady=5,sticky=W)
 
         #branch label   
@@ -79,13 +91,13 @@ class Attendance:
         #time label   
         time_label=Label(Left_frame,text="Time",font=("times new roman",20,"bold"))
         time_label.grid(row=4,column=0,padx=65,pady=20,sticky=W)
-        time_label=ttk.Entry(Left_frame,width=17,font=("times new roman",20,"bold"))
+        time_label=ttk.Entry(Left_frame,width=17,textvariable=self.var_time,font=("times new roman",20,"bold"))
         time_label.grid(row=4,column=1,padx=65,pady=20,sticky=W)
 
         #date label   
         date_label=Label(Left_frame,text="Date",font=("times new roman",20,"bold"))
         date_label.grid(row=5,column=0,padx=65,pady=20,sticky=W)
-        date_label=ttk.Entry(Left_frame,width=17,font=("times new roman",20,"bold"))
+        date_label=ttk.Entry(Left_frame,width=17,textvariable=self.var_date,font=("times new roman",20,"bold"))
         date_label.grid(row=5,column=1,padx=65,pady=20,sticky=W)
 
 
@@ -95,16 +107,16 @@ class Attendance:
         btn_frame=Frame(Left_frame,bd=6,relief=RAISED)
         btn_frame.place(x=10,y=510,width=760,height=56)
 
-        save_btn=Button(btn_frame,text="Export to CSV",padx=13,font=("times new roman",17,"bold"),width=14)
+        save_btn=Button(btn_frame,text="Export to CSV",command=self.export_csv  ,padx=13,font=("times new roman",17,"bold"),width=14)
         save_btn.grid(row=0,column=0)
 
-        update_btn=Button(btn_frame,text="Import from CSV",padx=13,font=("times new roman",17,"bold"),width=14)
+        update_btn=Button(btn_frame,text="Import from CSV",padx=13,command=self.import_csv,font=("times new roman",17,"bold"),width=14)
         update_btn.grid(row=0,column=1)
 
         delete_btn=Button(btn_frame,text="Update",padx=13,font=("times new roman",17,"bold"),width=14)
         delete_btn.grid(row=0,column=2)
 
-        reset_btn=Button(btn_frame,text="Reset",padx=13,font=("times new roman",17,"bold"),width=14)
+        reset_btn=Button(btn_frame,text="Reset",padx=13,command=self.reset_data,font=("times new roman",17,"bold"),width=14)
         reset_btn.grid(row=0,column=3)
 
 
@@ -141,7 +153,7 @@ class Attendance:
 
         ##table form
         table_frame=LabelFrame(right_frame,bd=8,relief=RIDGE,)
-        table_frame.place(x=20,y=240,width=720,height=350)
+        table_frame.place(x=20,y=240,width=720,height=320)
 
         scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
         scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
@@ -176,6 +188,74 @@ class Attendance:
         self.student_table["show"]="headings"
         self.student_table.pack(fill=BOTH,expand=1)
 
+        self.student_table.bind("<ButtonRelease>",self.get_cursor)
+
+
+
+    #fetch data
+    def fetch_data(self,rows):
+        self.student_table.delete(*self.student_table.get_children())
+
+        for i in rows:
+            self.student_table.insert("",END,values=i)
+
+
+
+    #export csv
+    def export_csv(self):
+        try:
+            if len(mydata)<1:
+
+                messagebox.showerror("No data found!","No data found to export!",parent=self.root)
+                return False
+
+            fln=filedialog.asksaveasfilename(initialdir=os.getcwd(),title="select csv",filetypes=(("CSV File","*.csv"),("All File","*.*")) ,parent=self.root)
+            with open(fln,mode="w",newline="") as myfile:
+                exp_write=csv.writer(myfile,delimiter=",")
+                for i in mydata:
+                    exp_write.writerow(i)
+                messagebox.showinfo("Operation","Your data exported successfully!")
+
+        except Exception as es:
+            messagebox.showerror("Errpr",f"Due to :{str(es)}",parent=self.root)
+
+    #import csv
+    def import_csv(self):
+        global mydata
+        mydata.clear()
+        fln=filedialog.askopenfilename(initialdir=os.getcwd(),title="select csv",filetypes=(("CSV File","*.csv"),("All File","*.*")) ,parent=self.root)
+        with open(fln) as myfile:
+            csvread=csv.reader(myfile,delimiter=",")
+
+            for i in csvread:
+                mydata.append(i)
+            self.fetch_data(mydata)
+
+
+    #get cursor
+    def get_cursor(self,event=""):
+        cursor_row=self.student_table.focus()
+        content=self.student_table.item(cursor_row)
+        rows=content['values']
+        self.var_status.set(rows[5])
+        self.var_name.set(rows[1])
+        self.var_roll.set(rows[0])
+        self.var_dep.set(rows[2])
+        self.var_time.set(rows[3])
+        self.var_date.set(rows[4])
+
+    #get reset  button
+    def reset_data(self,event=""):
+        cursor_row=self.student_table.focus()
+        content=self.student_table.item(cursor_row)
+        rows=content['values']
+        self.var_status.set("")
+        self.var_name.set("")
+        self.var_roll.set("")
+        self.var_dep.set("")
+        self.var_time.set("")
+        self.var_date.set("")
+        
 
         
 

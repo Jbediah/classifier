@@ -27,6 +27,7 @@ class Student:
         self.var_gender=StringVar()
         self.var_faculty=StringVar()
         self.var_radio=StringVar()
+        self.var_searchField=StringVar()
 
         
 
@@ -201,13 +202,13 @@ class Student:
         search_combobox.current(0)
         search_combobox.grid(row=0,column=1,padx=15,pady=16,sticky=W)
 
-        search_entry=ttk.Entry(search_frame,width=14,font=("times new roman",17,"bold"))
+        search_entry=ttk.Entry(search_frame,width=14,textvariable=self.var_searchField,font=("times new roman",17,"bold"))
         search_entry.grid(row=0,column=2,padx=15,pady=16,sticky=W)
 
-        search_btn=Button(search_frame,text="Search",font=("times new roman",17,"bold"),width=8)
+        search_btn=Button(search_frame,text="Search",command=self.search_data,font=("times new roman",17,"bold"),width=8)
         search_btn.grid(row=1,column=1,pady=10)
 
-        show_btn=Button(search_frame,text="Show all",font=("times new roman",17,"bold"),width=8)
+        show_btn=Button(search_frame,text="Show all",command=self.fetch_data,font=("times new roman",17,"bold"),width=8)
         show_btn.grid(row=1,column=2,pady=10)
 
 
@@ -288,6 +289,24 @@ class Student:
         conn=sqlite3.connect('classifier_db.db')
         my_cursor=conn.cursor()
         my_cursor.execute("select * from student_details")
+        data=my_cursor.fetchall()
+
+        if len(data)!=0:
+            self.student_table.delete(*self.student_table.get_children())
+            
+            for i in data:
+                self.student_table.insert("",END,values=i)
+            conn.commit()
+        conn.close()
+
+
+
+    #searching details from database
+    def search_data(self):
+        conn=sqlite3.connect('classifier_db.db')
+        my_cursor=conn.cursor()
+        id=self.var_searchField.get()
+        my_cursor.execute("select * from student_details where enroll=?",(id))
         data=my_cursor.fetchall()
 
         if len(data)!=0:
@@ -454,3 +473,16 @@ if __name__=="__main__":
     obj=Student(root)
     #root.resizable(False,False)
     root.mainloop()
+
+
+
+
+
+    """
+    if(=="Enrollment Number")
+    sql="select * from student_details where eno=?,((str)self.var.get())"
+
+
+
+
+    """
