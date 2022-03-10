@@ -150,6 +150,9 @@ class Attendance:
         show_btn=Button(search_frame,text="Show all",font=("times new roman",17,"bold"),width=8)
         show_btn.grid(row=1,column=2,pady=10)
 
+        total_label=Label(right_frame,text="Total Present: ",font=("times new roman",20,"bold"))
+        total_label.place(x=20,y=580)
+
 
         ##table form
         table_frame=LabelFrame(right_frame,bd=8,relief=RIDGE,)
