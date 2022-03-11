@@ -5,12 +5,14 @@ from student import Student
 from tkinter import messagebox
 import os
 import numpy as np
+import pandas as pd
 import cv2
 import csv
 from tkinter import filedialog
 
 
 
+##totalStudents="Click on Button to show!"
 mydata=[]
 
 class Attendance:
@@ -27,6 +29,8 @@ class Attendance:
         self.var_dep=StringVar()
         self.var_time=StringVar()
         self.var_date=StringVar()
+        self.var_totalStudents=StringVar()
+        self.var_totalStudents.set("Click on the button to show!")
         
 
 
@@ -166,11 +170,14 @@ class Attendance:
         search_btn=Button(search_frame,text="Search",font=("times new roman",17,"bold"),width=8)
         search_btn.grid(row=1,column=1,pady=10)
 
-        show_btn=Button(search_frame,text="Show all",font=("times new roman",17,"bold"),width=8)
+        show_btn=Button(search_frame,text="Show all",command=self.show_total,font=("times new roman",17,"bold"),width=8)
         show_btn.grid(row=1,column=2,pady=10)
 
         total_label=Label(right_frame,text="Total Present: ",font=("times new roman",20,"bold"))
-        total_label.place(x=20,y=580)
+        total_label.place(x=20,y=570)
+
+        total_present_label=Label(right_frame,textvariable=self.var_totalStudents,font=("times new roman",20,"bold"))
+        total_present_label.place(x=230,y=570)
 
 
         ##table form
@@ -277,6 +284,14 @@ class Attendance:
         self.var_dep.set("")
         self.var_time.set("")
         self.var_date.set("")
+
+
+    def show_total(self):
+        ##global totalStudents
+        
+        results=pd.read_csv("attendance.csv")
+        self.var_totalStudents.set(len(results)+1)
+        
         
 
         
