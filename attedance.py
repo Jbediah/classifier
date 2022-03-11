@@ -47,9 +47,22 @@ class Attendance:
         main_frame=Frame(f_lbl,bd=12,relief=RIDGE)
         main_frame.place(x=100,y=160,width=1700,height=760)
 
+        img1=Image.open(r"raw/bg2.jpg")
+        img1=img1.resize((1680,740),Image.ANTIALIAS)
+        self.photoimg1=ImageTk.PhotoImage(img1)
+        left_bg_lbl=Label(main_frame,image=self.photoimg1)
+        left_bg_lbl.place(x=0,y=0,width=1680,height=740)
+
         #leftLable Frame
         Left_frame=LabelFrame(main_frame,bd=12,relief=RIDGE,text="Add Attendance",font=("times new roman",20,"bold"))
         Left_frame.place(x=30,y=50,width=800,height=660)
+
+
+        img4=Image.open(r"raw/bg3.jpg")
+        img4=img4.resize((780,618),Image.ANTIALIAS)
+        self.photoimg4=ImageTk.PhotoImage(img4)
+        left_bg_lbl=Label(Left_frame,image=self.photoimg4)
+        left_bg_lbl.place(x=0,y=0,width=780,height=618)
 
 
 
@@ -128,6 +141,12 @@ class Attendance:
         #rightLable Frame
         right_frame=LabelFrame(main_frame,bd=12,relief=RIDGE,text="Attendance Status",font=("times new roman",20,"bold"))
         right_frame.place(x=860,y=50,width=800,height=660)
+
+        img3=Image.open(r"raw/bg3.jpg")
+        img3=img3.resize((780,618),Image.ANTIALIAS)
+        self.photoimg3=ImageTk.PhotoImage(img3)
+        left_bg_lbl=Label(right_frame,image=self.photoimg3)
+        left_bg_lbl.place(x=0,y=0,width=780,height=618)
 
         ##search frame
         search_frame=LabelFrame(right_frame,bd=12,relief=RIDGE,text="Search Frame",font=("times new roman",20,"bold"))
@@ -271,5 +290,5 @@ class Attendance:
 if __name__=="__main__":
     root=Tk()
     obj=Attendance(root)
-    #root.resizable(False,False)
+    root.resizable(False,False)
     root.mainloop()

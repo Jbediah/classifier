@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
 from home import Home
+from login import Login
+from signup import SignUp
 
 class Face_Recognition_System:
     def __init__(self,root):
@@ -28,10 +30,10 @@ class Face_Recognition_System:
         self.photoimg2=ImageTk.PhotoImage(img2)
 
         #imageButton1
-        b1=Button(f_lbl,image=self.photoimg2,command=self.homepage,cursor="hand2")
+        b1=Button(f_lbl,image=self.photoimg2,command=self.login,cursor="hand2")
         b1.place(x=300,y=350,width=250,height=250)
         #realButton
-        b1_1=Button(f_lbl,text="Sign In",command=self.homepage,cursor="hand2")
+        b1_1=Button(f_lbl,text="Sign In",command=self.login,cursor="hand2")
         b1_1.place(x=300,y=600,width=250,height=30)
 
         #imageButton2
@@ -40,10 +42,10 @@ class Face_Recognition_System:
         self.photoimg3=ImageTk.PhotoImage(img3)
 
 
-        b2=Button(f_lbl,image=self.photoimg3,cursor="hand2")
+        b2=Button(f_lbl,image=self.photoimg3,command=self.signup,cursor="hand2")
         b2.place(x=850,y=350,width=250,height=250)
         #realButton
-        b2_2=Button(f_lbl,text="Sign up",cursor="hand2")
+        b2_2=Button(f_lbl,text="Sign up",command=self.signup,cursor="hand2")
         b2_2.place(x=850,y=600,width=250,height=30)
 
         #imageButton3
@@ -59,9 +61,15 @@ class Face_Recognition_System:
 
 
     ##Function to open a new window
-    def homepage(self):
+    def login(self):
         self.new_window=Toplevel(self.root)
-        self.app=Home(self.new_window)
+        self.new_window.resizable(False,False)
+        self.app=Login(self.new_window)
+
+    def signup(self):
+        self.new_window=Toplevel(self.root)
+        self.new_window.resizable(False,False)
+        self.app=SignUp(self.new_window)
 
 
     def exit():
@@ -81,5 +89,5 @@ class Face_Recognition_System:
 if __name__=="__main__":
     root=Tk()
     obj=Face_Recognition_System(root)
-    #root.resizable(False,False)
+    root.resizable(False,False)
     root.mainloop()

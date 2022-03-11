@@ -3,6 +3,9 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from home import Home
 from tkinter import messagebox
+from signup import SignUp
+import sqlite3
+
 
 class Login:
     def __init__(self,root):
@@ -54,14 +57,63 @@ class Login:
         login_btn.place(x=30,y=280)
 
         #button
-        login_btn=Button(main_frame,text="sign up",bg="black",fg="white",cursor="hand2",font=("times new roman",18,"bold"))
+        login_btn=Button(main_frame,text="sign up",command=self.signup,bg="black",fg="white",cursor="hand2",font=("times new roman",18,"bold"))
         login_btn.place(x=140,y=280)
+
+
+    #fetching details from database
+    def fetch_data(self):
+        conn=sqlite3.connect('classifier_db.db')
+        my_cursor=conn.cursor()
+        my_cursor.execute("select * from user_details")
+        data=my_cursor.fetchall()
+
+        
+        conn.commit()
+        conn.close()
+
+
+    def signup(self):
+        self.new_window=Toplevel(self.root)
+        self.new_window.resizable(False,False)
+        self.app=SignUp(self.new_window)
+
+
+
 
 
     #On clicking sign in button
     def sign_in(self):
         if self.var_user.get()=="" or self.var_pass.get()=="":
             messagebox.showerror("error","field left blank",parent=self.root)
+        else:
+            try:
+                conn=sqlite3.connect('classifier_db.db')
+                my_cursor=conn.cursor()
+                my_cursor.execute("select * from user_details where user=? and pass=?",(self.var_user.get(),self.var_pass.get()))
+                print(self.var_pass.get())
+                row=my_cursor.fetchone()
+                if row==None:
+                    messagebox.showerror("error","Invalid")
+
+                else:
+                    messagebox.showinfo("info","Successfully logged in!")
+                    
+                    self.new_window=Toplevel(self.root)
+                    self.new_window.resizable(False,False)
+                    self.app=Home(self.new_window)
+
+                    self.root.withdraw()
+
+                
+                conn.commit()
+                conn.close()
+
+
+                
+            except Exception as es:
+                messagebox.showerror("Error",f"Due to: {str(es)}",parent=self.root)
+    
 
 
 

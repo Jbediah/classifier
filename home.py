@@ -92,21 +92,25 @@ class Home:
  ##Function to open student window
     def student_page(self):
         self.new_window=Toplevel(self.root)
+        self.new_window.resizable(False,False)
         self.app=Student(self.new_window)
 
  ##Function to traindata  window
     def train_data_page(self):
         self.new_window=Toplevel(self.root)
+        self.new_window.resizable(False,False)
         self.app=Train(self.new_window)
 
 ##Function to facialrecog  window
     def facial_recog_page(self):
         self.new_window=Toplevel(self.root)
+        self.new_window.resizable(False,False)
         self.app=Face_recognition(self.new_window)
 
 ##Function to attendanceview  window
     def attedance_page(self):
         self.new_window=Toplevel(self.root)
+        self.new_window.resizable(False,False)
         self.app=Attendance(self.new_window)
 
 

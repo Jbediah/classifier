@@ -46,12 +46,28 @@ class Student:
         
 
         #frame
+        img2=Image.open(r"raw/bg2.jpg")
+        img2=img2.resize((1680,820),Image.ANTIALIAS)
+        self.photoimg2=ImageTk.PhotoImage(img2)
         main_frame=Frame(f_lbl,relief=RIDGE,bd=12)
         main_frame.place(x=100,y=120,width=1700,height=840)
+
+        bg_lbl=Label(main_frame,image=self.photoimg2)
+        bg_lbl.place(x=0,y=0,width=1680,height=820)
 
         #leftLable Frame
         Left_frame=LabelFrame(main_frame,bd=12,relief=RIDGE,text="Student Details",font=("times new roman",20,"bold"))
         Left_frame.place(x=30,y=50,width=800,height=750)
+
+
+
+        img3=Image.open(r"raw/bg3.jpg")
+        img3=img3.resize((774,716),Image.ANTIALIAS)
+        self.photoimg3=ImageTk.PhotoImage(img3)
+        left_bg_lbl=Label(Left_frame,image=self.photoimg3)
+        left_bg_lbl.place(x=0,y=0,width=774,height=716)
+
+
 
         #current course
         current_frame=LabelFrame(Left_frame,bd=12,relief=RIDGE,text="Current Details",font=("times new roman",20,"bold"))
@@ -188,6 +204,13 @@ class Student:
         #RightLable Frame
         Right_frame=LabelFrame(main_frame,bd=12,relief=RIDGE,text="Student Database ",font=("times new roman",20,"bold"))
         Right_frame.place(x=860,y=50,width=800,height=750)
+
+
+        img4=Image.open(r"raw/bg3.jpg")
+        img4=img4.resize((774,716),Image.ANTIALIAS)
+        self.photoimg4=ImageTk.PhotoImage(img4)
+        left_bg_lbl=Label(Right_frame,image=self.photoimg4)
+        left_bg_lbl.place(x=0,y=0,width=774,height=716)
 
 
         ##search frame
@@ -471,7 +494,7 @@ class Student:
 if __name__=="__main__":
     root=Tk()
     obj=Student(root)
-    #root.resizable(False,False)
+    root.resizable(False,False)
     root.mainloop()
 
 

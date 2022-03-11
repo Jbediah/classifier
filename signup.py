@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from home import Home
 from tkinter import messagebox
+import sqlite3
 
 class SignUp:
     def __init__(self,root):
@@ -54,10 +55,40 @@ class SignUp:
         login_btn.place(x=85,y=280)
 
 
+
+
+
+    #fetching details from database
+    def fetch_data(self):
+        conn=sqlite3.connect('classifier_db.db')
+        my_cursor=conn.cursor()
+        my_cursor.execute("select * from user_details")
+        data=my_cursor.fetchall()
+
+        
+        conn.commit()
+        conn.close()
+
+
     #on clicking sign up button
     def sign_up(self):
         if self.var_user.get()=="" or self.var_pass.get()=="":
             messagebox.showerror("error","field left blank",parent=self.root)
+        else:
+            try:
+                conn=sqlite3.connect('classifier_db.db')
+                my_cursor=conn.cursor()
+                my_cursor.execute("insert into user_details values(?,?)",(self.var_user.get(),self.var_pass.get()))
+
+                conn.commit()
+                self.fetch_data()   
+                conn.close()
+                messagebox.showinfo("info","user details has been added successfully!",parent=self.root)
+                self.root.withdraw()
+
+            except Exception as es:
+                messagebox.showerror("Error",f"Due to: {str(es)}",parent=self.root)
+
 
 
 
